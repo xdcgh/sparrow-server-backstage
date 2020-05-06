@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="sparrowShop" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+        <plugin type="com.qiukeke.mybatis.plugins.MySQLLimitPlugin" />
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/sparrowDB?useSSL=false&amp;allowPublicKeyRetrieval=true"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.xdc.sparrowShop.generate" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="db.mybatis"  targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xdc.sparrowShop.generate"  targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table schema="sparrowDB" tableName="PROVINCE" domainObjectName="Province" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="CITY" domainObjectName="City" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="AREA" domainObjectName="Area" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="SHOP" domainObjectName="Shop" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="FRESH_TYPE" domainObjectName="FreshType" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="FRESH" domainObjectName="Fresh" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="USER" domainObjectName="User" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="ADDRESS" domainObjectName="Address" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="MY_ORDER" domainObjectName="MyOrder" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+        <table schema="sparrowDB" tableName="ORDER_FRESH" domainObjectName="OrderFresh" >
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true" />
+        </table>
+
+    </context>
+</generatorConfiguration>
