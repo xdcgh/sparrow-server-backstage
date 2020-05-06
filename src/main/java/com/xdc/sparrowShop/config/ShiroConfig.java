@@ -1,8 +1,9 @@
 package com.xdc.sparrowShop.config;
 
+import com.xdc.sparrowShop.generate.Shop;
 import com.xdc.sparrowShop.service.ShiroRealm;
-import com.xdc.sparrowShop.service.UserContext;
-import com.xdc.sparrowShop.service.UserService;
+import com.xdc.sparrowShop.service.ShopContext;
+import com.xdc.sparrowShop.service.ShopService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -29,7 +30,7 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig implements WebMvcConfigurer {
     @Autowired
-    UserService userService;
+    ShopService shopService;
 
     @Value("${sparrowShop.redis.host}")
     String redisHost;
@@ -41,10 +42,14 @@ public class ShiroConfig implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-                Object id = SecurityUtils.getSubject().getPrincipal();
+                Object phone = SecurityUtils.getSubject().getPrincipal();
 
-                if (id != null) {
-                    userService.getUserById(id.toString()).ifPresent(UserContext::setCurrentUser);
+                if (phone != null) {
+                    Shop shop = shopService.getShopByPhone(phone.toString());
+
+                    if (shop != null) {
+                        ShopContext.setCurrentShop(shop);
+                    }
                 }
 
                 return true;
@@ -52,7 +57,7 @@ public class ShiroConfig implements WebMvcConfigurer {
 
             @Override
             public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-                UserContext.clearCurrentUser();
+                ShopContext.clearCurrentUser();
             }
         });
     }
@@ -64,10 +69,10 @@ public class ShiroConfig implements WebMvcConfigurer {
 
         // 设置过滤接口
         Map<String, String> pattern = new HashMap<>();
-        pattern.put("/api/wx/login", "anon");
-        pattern.put("/api/wx/shop/**", "anon");
-        pattern.put("/api/wx/fresh/**", "anon");
-        pattern.put("/api/wx/address/areaList", "anon");
+
+        pattern.put("/api/backstage/login", "anon");
+        pattern.put("/api/backstage/register", "anon");
+
         pattern.put("/**", "authc");
 
         Map<String, Filter> filterMap = new LinkedHashMap<>();

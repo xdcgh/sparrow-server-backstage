@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.xdc</groupId>
-	<artifactId>sparrowShop</artifactId>
+	<artifactId>sparrowShopBackstage</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sparrowShop</name>
-	<description>The project for graduation</description>
+	<name>sparrowShopBackstage</name>
+	<description>The project for sparrowShop backstage</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -71,17 +71,6 @@
 			<artifactId>http-request</artifactId>
 			<version>6.0</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.binarywang</groupId>
-			<artifactId>weixin-java-miniapp</artifactId>
-			<version>3.7.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

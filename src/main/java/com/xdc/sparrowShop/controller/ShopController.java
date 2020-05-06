@@ -1,31 +1,46 @@
 package com.xdc.sparrowShop.controller;
 
-import com.xdc.sparrowShop.entity.Response;
 import com.xdc.sparrowShop.generate.Shop;
+import com.xdc.sparrowShop.service.ShopContext;
 import com.xdc.sparrowShop.service.ShopService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/wx")
+@RequestMapping("/api/backstage/")
 public class ShopController {
 
-    private ShopService shopService;
+    private final ShopService shopService;
 
     public ShopController(ShopService shopService) {
         this.shopService = shopService;
     }
 
-    @GetMapping("/shop/area/{areaId}")
+    @PostMapping("login")
     @ResponseBody
-    public Response<List<Shop>> getShopListByAreaId(@PathVariable("areaId") int areaId) {
-        return Response.of(shopService.getShopListByAreaId(areaId));
+    public Shop login(@RequestBody Shop shop) {
+
+        UsernamePasswordToken token = new UsernamePasswordToken(
+                shop.getPhone(),
+                shop.getPassword()
+        );
+
+        token.setRememberMe(true);
+
+        SecurityUtils.getSubject().login(token);
+
+        return shopService.getShopByPhone(shop.getPhone());
     }
 
-    @GetMapping("/shop/id/{id}")
+    @GetMapping("/status")
     @ResponseBody
-    public Response<Shop> getShopById(@PathVariable("id") int id) {
-        return Response.of(shopService.getShopById(id));
+    public Shop loginStatus() {
+        return ShopContext.getCurrentShop();
+    }
+
+    @PostMapping("logout")
+    public void logout() {
+        SecurityUtils.getSubject().logout();
     }
 }

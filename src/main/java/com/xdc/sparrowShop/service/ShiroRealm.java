@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ShiroRealm extends AuthorizingRealm {
-    private final UserService userService;
+    private final ShopService shopService;
 
-    public ShiroRealm(UserService userService) {
-        this.userService = userService;
+    public ShiroRealm(ShopService shopService) {
+        this.shopService = shopService;
 
         this.setCredentialsMatcher((token, info) ->
                 new String((char[]) token.getCredentials())
@@ -28,10 +28,10 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String id = (String) token.getPrincipal();
+        String phone = (String) token.getPrincipal();
 
-        String correctCode = userService.getOpenidById(id);
+        String correctCode = shopService.getPasswordByPhone(phone);
 
-        return new SimpleAuthenticationInfo(id, correctCode, getName());
+        return new SimpleAuthenticationInfo(phone, correctCode, getName());
     }
 }
