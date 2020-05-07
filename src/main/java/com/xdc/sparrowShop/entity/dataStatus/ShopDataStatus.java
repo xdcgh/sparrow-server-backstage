@@ -1,8 +1,9 @@
 package com.xdc.sparrowShop.entity.dataStatus;
 
 public enum ShopDataStatus {
-    ONLINE(),
-    STOPPING;
+    在线(),
+    停业(),
+    审核中();
 
 
 
