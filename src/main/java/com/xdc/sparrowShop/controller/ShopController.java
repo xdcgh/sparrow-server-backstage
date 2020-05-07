@@ -33,7 +33,7 @@ public class ShopController {
         return shopService.getShopByPhone(shop.getPhone());
     }
 
-    @GetMapping("/status")
+    @GetMapping("status")
     @ResponseBody
     public Shop loginStatus() {
         return ShopContext.getCurrentShop();
@@ -43,4 +43,5 @@ public class ShopController {
     public void logout() {
         SecurityUtils.getSubject().logout();
     }
+
 }

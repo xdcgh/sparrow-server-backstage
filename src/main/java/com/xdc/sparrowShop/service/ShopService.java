@@ -4,11 +4,9 @@ import com.xdc.sparrowShop.entity.dataStatus.ShopDataStatus;
 import com.xdc.sparrowShop.generate.Shop;
 import com.xdc.sparrowShop.generate.ShopExample;
 import com.xdc.sparrowShop.generate.ShopMapper;
-import com.xdc.sparrowShop.generate.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShopService {

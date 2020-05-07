@@ -5,17 +5,15 @@ import java.util.List;
 public class PageResponse<T> {
     private int pageNum;
     private int pageSize;
-    private int totalPage;
+    private int totalCounts;
     private List<T> data;
 
     public PageResponse() {
     }
 
-    public static <T> PageResponse<T> pagedData(int pageNum, int pageSize, int totalPage, List<T> data) {
+    public static <T> PageResponse<T> pagedData(int totalPage, List<T> data) {
         PageResponse<T> result = new PageResponse<>();
-        result.setPageNum(pageNum);
-        result.setPageSize(pageSize);
-        result.setTotalPage(totalPage);
+        result.setTotalCounts(totalPage);
         result.setData(data);
         return result;
     }
@@ -36,12 +34,12 @@ public class PageResponse<T> {
         this.pageSize = pageSize;
     }
 
-    public int getTotalPage() {
-        return totalPage;
+    public int getTotalCounts() {
+        return totalCounts;
     }
 
-    public void setTotalPage(int totalPage) {
-        this.totalPage = totalPage;
+    public void setTotalCounts(int totalCounts) {
+        this.totalCounts = totalCounts;
     }
 
     public List<T> getData() {

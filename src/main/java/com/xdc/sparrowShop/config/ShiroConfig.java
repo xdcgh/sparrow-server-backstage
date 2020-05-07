@@ -73,7 +73,9 @@ public class ShiroConfig implements WebMvcConfigurer {
         pattern.put("/api/backstage/login", "anon");
         pattern.put("/api/backstage/register", "anon");
 
-        pattern.put("/**", "authc");
+        pattern.put("/api/backstage/freshType", "anon");
+
+        pattern.put("/**", "anon");
 
         Map<String, Filter> filterMap = new LinkedHashMap<>();
         filterMap.put("shiroLoginFilter", shiroLoginFilter);
