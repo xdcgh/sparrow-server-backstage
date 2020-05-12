@@ -59,6 +59,10 @@ public class ShopService {
         shop.setId(null);
         shop.setStatus(ShopDataStatus.审核中.getName());
 
-        shopMapper.insertSelective(shop);
+        try {
+            shopMapper.insertSelective(shop);
+        } catch (Exception e) {
+            throw HttpException.badRequest("该手机号已经注册过");
+        }
     }
 }
