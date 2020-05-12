@@ -74,7 +74,9 @@ public class ShiroConfig implements WebMvcConfigurer {
         pattern.put("/api/backstage/register", "anon");
 
         pattern.put("/api/backstage/freshType", "anon");
+        pattern.put("/api/backstage/area", "anon");
 
+        // todo 要给为 鉴权模式
         pattern.put("/**", "anon");
 
         Map<String, Filter> filterMap = new LinkedHashMap<>();
