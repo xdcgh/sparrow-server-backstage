@@ -1,11 +1,15 @@
 package com.xdc.sparrowShop.controller;
 
+import com.xdc.sparrowShop.entity.HttpException;
+import com.xdc.sparrowShop.entity.Response;
 import com.xdc.sparrowShop.generate.Shop;
 import com.xdc.sparrowShop.service.ShopContext;
 import com.xdc.sparrowShop.service.ShopService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api/backstage/")
@@ -44,4 +48,29 @@ public class ShopController {
         SecurityUtils.getSubject().logout();
     }
 
+    @PatchMapping("shop")
+    @ResponseBody
+    public Response<Shop> updateShop(@RequestBody Shop shop, HttpServletResponse response) {
+        try {
+            shopService.updateShop(shop, ShopContext.getCurrentShop());
+
+            return null;
+        } catch (HttpException e) {
+            response.setStatus(e.getStatusCode());
+            return Response.of(e.getMessage(), null);
+        }
+    }
+
+    @PostMapping("register")
+    @ResponseBody
+    public Response<String> createdShop(@RequestBody Shop shop, HttpServletResponse response) {
+        try {
+            shopService.createShop(shop);
+
+            return null;
+        } catch (HttpException e) {
+            response.setStatus(e.getStatusCode());
+            return Response.of(e.getMessage(), null);
+        }
+    }
 }

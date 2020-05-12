@@ -4,6 +4,7 @@ public enum OrderDataStatus {
     待配送(),
     配送中(),
     已完成(),
+    已送达(),
     退款中(),
     已退款();
 

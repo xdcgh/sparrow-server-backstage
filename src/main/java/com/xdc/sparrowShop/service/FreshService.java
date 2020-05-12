@@ -118,4 +118,8 @@ public class FreshService {
     private int getAreaIdByShopId(Integer shopId) {
         return shopMapper.selectByPrimaryKey(shopId).getAreaId();
     }
+
+    public Fresh getFreshById(Integer freshId) {
+        return freshMapper.selectByPrimaryKey(freshId);
+    }
 }
