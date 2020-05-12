@@ -34,6 +34,14 @@ public class ShopController {
 
         SecurityUtils.getSubject().login(token);
 
+        if (shop.getPhone().equals("admin")) {
+            Shop adminShop = new Shop();
+
+            adminShop.setPhone("admin");
+
+            return adminShop;
+        }
+
         return shopService.getShopByPhone(shop.getPhone());
     }
 

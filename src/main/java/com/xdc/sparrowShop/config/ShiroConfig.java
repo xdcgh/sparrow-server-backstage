@@ -42,10 +42,18 @@ public class ShiroConfig implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-                Object phone = SecurityUtils.getSubject().getPrincipal();
+                String phone = (String) SecurityUtils.getSubject().getPrincipal();
 
                 if (phone != null) {
-                    Shop shop = shopService.getShopByPhone(phone.toString());
+                    Shop shop;
+
+                    if (phone.equals("admin")) {
+                        shop = new Shop();
+
+                        shop.setPhone("admin");
+                    } else {
+                        shop = shopService.getShopByPhone(phone);
+                    }
 
                     if (shop != null) {
                         ShopContext.setCurrentShop(shop);
