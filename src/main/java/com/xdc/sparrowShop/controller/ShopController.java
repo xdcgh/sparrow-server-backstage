@@ -1,6 +1,7 @@
 package com.xdc.sparrowShop.controller;
 
 import com.xdc.sparrowShop.entity.HttpException;
+import com.xdc.sparrowShop.entity.PageResponse;
 import com.xdc.sparrowShop.entity.Response;
 import com.xdc.sparrowShop.generate.Shop;
 import com.xdc.sparrowShop.service.ShopContext;
@@ -80,5 +81,14 @@ public class ShopController {
             response.setStatus(e.getStatusCode());
             return Response.of(e.getMessage(), null);
         }
+    }
+
+    @GetMapping("shopList")
+    @ResponseBody
+    public PageResponse<Shop> getShopListOfApply(@RequestParam("pageNum") Integer pageNum,
+                                                 @RequestParam("pageSize") Integer pageSize,
+                                                 @RequestParam("status") String status,
+                                                 @RequestParam(value = "name", required = false) String name) {
+        return shopService.getShopListOfApply(pageNum, pageSize, status, name);
     }
 }
